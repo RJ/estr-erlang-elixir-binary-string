@@ -1,0 +1,12 @@
+{application, estr,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { estr_app, []}},
+  {env, []}
+ ]}.

@@ -1,6 +1,6 @@
 {application, estr,
  [
-  {description, ""},
+  {description, "Wrapper around Elixir.String"},
   {vsn, "1"},
   {registered, []},
   {applications, [
@@ -8,5 +8,11 @@
                   stdlib
                  ]},
   {mod, { estr_app, []}},
-  {env, []}
+  {env, []},
+  {modules, [
+    'Elixir.String.Graphemes',
+    'Elixir.String.Unicode',
+    'Elixir.String',
+    estr, estr_app, estr_sup]}
  ]}.
+

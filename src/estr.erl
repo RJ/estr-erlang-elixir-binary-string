@@ -115,10 +115,10 @@ next_grapheme(String) when is_binary(String) ->
 printable(String) when is_binary(String) ->
     'Elixir.String':'printable?'(String).
 
-%% @doc Returns a new binary based on subject by replacing the parts matching pattern by replacement. By default, it replaces all entries, except if the global option is set to false
-replace(Subject, Pattern, Replacement) -> replace(Subject, Pattern, Replacement, []).
-replace(Subject, Pattern, Replacement, Options) when is_binary(Subject), is_binary(Pattern), is_binary(Replacement), is_list(Options) ->
-    'Elixir.String':replace(Subject, Pattern, Replacement, Options).
+
+%% @doc Returns a new binary based on subject by replacing the parts matching pattern by replacement.
+replace(Subject, Pattern, Replacement) when is_binary(Subject), is_binary(Pattern), is_binary(Replacement) ->
+    binary:replace(Subject, Pattern, Replacement, [global]).
 
 %% @doc Reverses the given string. Works on graphemes
 reverse(String) when is_binary(String) ->

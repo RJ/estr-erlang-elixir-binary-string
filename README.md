@@ -1,32 +1,44 @@
-# Use Elixir.String in Erlang
+# Use Elixir.String from Erlang
 
-````estr```` is a small erlang wrapper around ````Elixir.String````.
+`estr` is an Erlang adaptor for Elixir.String, 
 
-There are some ````Elixir.String*.beam```` files precompiled in ebin/.
-These were taken from an Elixir 1.0.2 build. See
-https://github.com/elixir-lang
+Elixir strings are UTF-8 encoded binaries.
+Read the [docs for Elixir.String](https://hexdocs.pm/elixir/String.html) to know more.
 
-NB: don't run "rebar clean" or you'll lose the Elixir beams.
+`estr` bundles a few select `.beam` files from Elixir, and provides a more
+Erlangy API.
+These Elixir beam files were taken from an Elixir 1.4.0 build on 64-bit Ubuntu Linux,
+circa Feb. 2017.
 
-These are from Elixir 1.0.2, via erlang 17.1 (homebrew).
-Only tested on 17.4.
+I have only tested this with Erlang 19.2. It probably works with earlier versions.
 
-## Look
+## Usage
 
-Read the ````estr.erl```` and the Elixir.String docs for more.
+You can include this as you would any dep, and have utf8 binary strings in your erlang.
 
-    1> estr:rjust(estr:new("hello"),10).
-    <<"     hello">>
-    2> estr:next_codepoint(estr:new("жen")).
+The `estr` application has no processes or supervisors.
+
+    $ rebar3 shell
+
+    1> estr:new("Hello").
+    <<"Hello">>
+    2> estr:new(<<"Hello">>).
+    <<"Hello">>
+    3> estr:next_codepoint(estr:new("жen")).
     {<<208,182>>,<<"en">>}
-
-
-    1> S = estr:new("Джубадзе").
+    4> S = estr:new("Джубадзе").
     <<208,148,208,182,209,131,208,177,208,176,208,180,208,183,208,181>>
-    2> estr:length(S).
+    5> estr:length(S).
     8
-    3> size(S).
+    6> size(S).
     16
-    4> io:format(estr:to_char_list(estr:upcase(S))).
+    7> io:format(estr:to_char_list(estr:upcase(S))).
     ДЖУБАДЗЕ
+
+
+## Smoke Test
+
+To check `estr` can call Elixir.String without crashing:
+
+    rebar3 eunit
 
